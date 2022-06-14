@@ -1,7 +1,8 @@
+import { Email } from "../src/email";
 import { Contacto } from "./contacto.interface";
 
 export interface Manager{
-    agregar(contacto: Contacto): void;
-    eliminar(contacto: Contacto): void;
-    notificar(): void;
+    agregar(contacto: Contacto): boolean;
+    eliminar(contacto: Contacto): boolean;
+    notificar(email: Email): void;
 }

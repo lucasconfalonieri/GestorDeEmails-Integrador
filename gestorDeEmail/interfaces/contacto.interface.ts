@@ -1,7 +1,5 @@
-import {Manager} from "./manager.interface";
+import { Email } from "../src/email";
 
 export interface Contacto{
-    nombre: string;
-    correo: string;
-    update(manager: Manager): void;
+    update(email: Email): void;
 }
