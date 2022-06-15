@@ -5,5 +5,6 @@ export interface Contacto{
     correo: string;
     BandejaEnviados: Email[];
     BandejaEntrada: Email[];
+    buscarcorreo(texto: string);
     update(email: Email): void;
 }

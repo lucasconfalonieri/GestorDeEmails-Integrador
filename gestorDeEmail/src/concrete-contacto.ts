@@ -10,6 +10,16 @@ export class ConcreteContacto implements Contacto{
         this.nombre = contacto.nombre;
         this.correo = contacto.correo;
     }
+
+    buscarcorreo(texto: string){
+        for (const i of this.BandejaEntrada){
+            if(i.asunto === texto || i.contenido === texto){
+                return i;
+            }
+        }
+        return false;
+    }
+
     update(email: Email): void {
         if(email.remitente.nombre === this.nombre){
             this.BandejaEnviados.push(email);
