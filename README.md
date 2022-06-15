@@ -1,0 +1,1 @@
+![Test](https://github.com/lucasconfalonieri/GestorDeEmails-Integrador/actions/workflows/node.js.yml/badge.svg)
