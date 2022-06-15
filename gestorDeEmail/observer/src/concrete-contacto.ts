@@ -4,8 +4,8 @@ import { Email } from "./email";
 export class ConcreteContacto implements Contacto{
     public nombre: string;
     public correo: string;
-    public BandejaEnviados: Email[] = [];
-    public BandejaEntrada: Email[] = [];
+    private BandejaEnviados: Email[] = [];
+    private BandejaEntrada: Email[] = [];
     constructor(contacto){
         this.nombre = contacto.nombre;
         this.correo = contacto.correo;

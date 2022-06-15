@@ -3,16 +3,16 @@ import { Manager } from "../interfaces/manager.interface";
 import { Email } from "./email";
 
 export class ConcreteManager implements Manager{
-    public email: Email;
     public contactos: Contacto[] = [];
     
 
     public agregar(contacto: Contacto): boolean {
         const isExist = this.contactos.includes(contacto);
         if (isExist){
-            return true;
+            return false;
         }
-        return false;
+        this.contactos.push(contacto);
+        return true;
     }
 
     public eliminar(contacto: Contacto): boolean {
@@ -24,7 +24,7 @@ export class ConcreteManager implements Manager{
         return true;
     }
 
-    public eliminartodos(contacto: Contacto): boolean {
+    public eliminartodos(): boolean {
         this.contactos.splice(0, this.contactos.length);
         if(this.contactos.length === 0){
             return true
