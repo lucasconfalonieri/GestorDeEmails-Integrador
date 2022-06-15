@@ -6,6 +6,7 @@ export class ConcreteContacto implements Contacto{
     public correo: string;
     private BandejaEnviados: Email[] = [];
     private BandejaEntrada: Email[] = [];
+    public contactoNotificado: boolean;
     constructor(contacto){
         this.nombre = contacto.nombre;
         this.correo = contacto.correo;
@@ -29,7 +30,8 @@ export class ConcreteContacto implements Contacto{
         return false;
     }
 
-    update(email: Email): void {
+    update(email: Email): void{
+        this.contactoNotificado = true;
         if(email.remitente.nombre === this.nombre){
             this.BandejaEnviados.push(email);
         }else {

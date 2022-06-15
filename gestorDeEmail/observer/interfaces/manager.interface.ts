@@ -5,5 +5,5 @@ export interface Manager{
     contactos: Contacto[];
     agregar(contacto: Contacto): boolean;
     eliminar(contacto: Contacto): boolean;
-    notificar(email: Email): void;
+    notificar(email: Email);
 }

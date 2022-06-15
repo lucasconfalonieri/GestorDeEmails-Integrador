@@ -35,3 +35,31 @@ test('5_Cuando_Eliminar_Deberia_EliminarUnContactoSeleccionadoDeLaLista', () => 
     manager.agregar(contacto1);
     expect(manager.eliminar(contacto1)).toBeTruthy();
 })
+
+test('6_Cuando_EliminarTodos_Deberia_EliminarTodosLosContactosDeLaLista', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
+    const manager = new ConcreteManager();
+    manager.agregar(contacto1);
+    manager.agregar(contacto2);
+    expect(manager.contactos.length).toBe(2);
+    manager.eliminartodos()
+    expect(manager.contactos.length).toBe(0);
+})
+
+test('7_Cuando_CrearCorreo_Deberia_CrearUnEmailParaNotificarlo', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const manager = new ConcreteManager();
+    manager.crearcorreo(email);
+    expect(manager.totalEmails.length).toBe(1);
+})
+
+test('8_Cuando_Notificar_Deberia_NotificarALosContactosDelEmail', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
+    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const manager = new ConcreteManager();
+    manager.agregar(contacto2);
+    expect(manager.notificar(email)).toBeTruthy();
+})

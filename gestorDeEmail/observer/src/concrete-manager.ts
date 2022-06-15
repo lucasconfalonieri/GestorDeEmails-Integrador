@@ -4,7 +4,7 @@ import { Email } from "./email";
 
 export class ConcreteManager implements Manager{
     public contactos: Contacto[] = [];
-    
+    public totalEmails: Email[] = [];
 
     public agregar(contacto: Contacto): boolean {
         const isExist = this.contactos.includes(contacto);
@@ -32,11 +32,15 @@ export class ConcreteManager implements Manager{
         return false;
     }
 
+    public crearcorreo(email: Email){
+        this.totalEmails.push(email);
+        this.notificar(email);
+    }
 
-    public notificar(email: Email): void {
+    public notificar(email: Email){
         for(const contacto of this.contactos){
             contacto.update(email);
         }
+        return true;
     }
-
 }
