@@ -11,8 +11,17 @@ export class ConcreteContacto implements Contacto{
         this.correo = contacto.correo;
     }
 
-    buscarcorreo(texto: string){
+    buscarcorreoBandejaEntrada(texto: string){
         for (const i of this.BandejaEntrada){
+            if(i.asunto === texto || i.contenido === texto){
+                return i;
+            }
+        }
+        return false;
+    }
+
+    buscarcorreoBandejaEnviados(texto: string) {
+        for (const i of this.BandejaEnviados){
             if(i.asunto === texto || i.contenido === texto){
                 return i;
             }
