@@ -63,3 +63,36 @@ test('8_Cuando_Notificar_Deberia_NotificarALosContactosDelEmail', () => {
     manager.agregar(contacto2);
     expect(manager.notificar(email)).toBeTruthy();
 })
+
+test('9_Cuando_BuscarCorreoBandejaEntrada_Deberia_DevolverElCorreoBuscado', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
+    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const manager = new ConcreteManager();
+    manager.agregar(contacto2);
+    manager.crearcorreo(email);
+    expect(contacto2.buscarcorreoBandejaEntrada("Trabajo").remitente).toEqual(contacto1);
+})
+
+test('10_Cuando_BuscarCorreoBandejaEnviados_Deberia_DevolverElCorreoBuscado', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
+    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const manager = new ConcreteManager();
+    manager.agregar(contacto2);
+    manager.agregar(contacto1);
+    manager.crearcorreo(email);
+    expect(contacto1.buscarcorreoBandejaEnviados("Trabajo").remitente).toEqual(contacto1);
+})
+
+test('11_Cuando_Update_Deberia_ActualizarACadaContactoDelEmail', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
+    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const manager = new ConcreteManager();
+    manager.agregar(contacto2);
+    manager.agregar(contacto1);
+    manager.crearcorreo(email);
+    expect(contacto1.BandejaEnviados.length).toBe(1);
+    expect(contacto1.BandejaEntrada.length).toBe(0);
+})

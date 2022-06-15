@@ -4,34 +4,35 @@ import { Email } from "./email";
 export class ConcreteContacto implements Contacto{
     public nombre: string;
     public correo: string;
-    private BandejaEnviados: Email[] = [];
-    private BandejaEntrada: Email[] = [];
-    public contactoNotificado: boolean;
+    public BandejaEnviados: Email[] = [];
+    public BandejaEntrada: Email[] = [];
+    
     constructor(contacto){
         this.nombre = contacto.nombre;
         this.correo = contacto.correo;
     }
 
-    buscarcorreoBandejaEntrada(texto: string){
+    buscarcorreoBandejaEntrada(texto: string): Email{
         for (const i of this.BandejaEntrada){
             if(i.asunto === texto || i.contenido === texto){
                 return i;
             }
         }
-        return false;
+        const noencontrado = new Email({asunto: "no encontrado", contenido: "no encontrado", remitente: new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"})})
+        return noencontrado;
     }
 
-    buscarcorreoBandejaEnviados(texto: string) {
+    buscarcorreoBandejaEnviados(texto: string): Email{
         for (const i of this.BandejaEnviados){
             if(i.asunto === texto || i.contenido === texto){
                 return i;
             }
         }
-        return false;
+        const noencontrado = new Email({asunto: "no encontrado", contenido: "no encontrado", remitente: new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"})})
+        return noencontrado;
     }
 
     update(email: Email): void{
-        this.contactoNotificado = true;
         if(email.remitente.nombre === this.nombre){
             this.BandejaEnviados.push(email);
         }else {
