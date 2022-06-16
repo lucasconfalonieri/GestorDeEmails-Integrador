@@ -1,7 +1,7 @@
-import { ConcreteContacto } from "./observer/src/concrete-contacto"
-import { ConcreteManager } from "./observer/src/concrete-manager";
+import { ConcreteContacto } from "./observer/decorator/concrete-contacto"
+import { ConcreteManager } from "./observer/decorator/concrete-manager";
 import { Email } from "./observer/singleton/email"
-import { eliminarTodosDecorator } from "./observer/src/eliminartodosDecorator";
+import { eliminarTodosDecorator } from "./observer/decorator/eliminartodosDecorator";
 
 //#region Observer
 test('1_Cuando_SeCreaUnContacto_Deberia_CrearseConNombreYCorreo', () => {
