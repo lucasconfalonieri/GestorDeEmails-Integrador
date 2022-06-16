@@ -1,6 +1,6 @@
 import { ConcreteContacto } from "./observer/src/concrete-contacto"
 import { ConcreteManager } from "./observer/src/concrete-manager";
-import { Email } from "./observer/src/email"
+import { Email } from "./observer/singleton/email"
 
 test('1_Cuando_SeCreaUnContacto_Deberia_CrearseConNombreYCorreo', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
@@ -10,7 +10,7 @@ test('1_Cuando_SeCreaUnContacto_Deberia_CrearseConNombreYCorreo', () => {
 
 test('2_Cuando_SeCreaUnEmail_Deberia_CrearseConAsuntoContenidoYRemitente', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     expect(email.asunto).toEqual("Trabajo");
     expect(email.contenido).toEqual("123456789");
     expect(email.remitente.nombre).toBe("Nicolas");
@@ -49,7 +49,7 @@ test('6_Cuando_EliminarTodos_Deberia_EliminarTodosLosContactosDeLaLista', () => 
 
 test('7_Cuando_CrearCorreo_Deberia_CrearUnEmailParaNotificarlo', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     const manager = new ConcreteManager();
     manager.crearcorreo(email);
     expect(manager.totalEmails.length).toBe(1);
@@ -58,7 +58,7 @@ test('7_Cuando_CrearCorreo_Deberia_CrearUnEmailParaNotificarlo', () => {
 test('8_Cuando_Notificar_Deberia_NotificarALosContactosDelEmail', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     const manager = new ConcreteManager();
     manager.agregar(contacto2);
     expect(manager.notificar(email)).toBeTruthy();
@@ -67,7 +67,7 @@ test('8_Cuando_Notificar_Deberia_NotificarALosContactosDelEmail', () => {
 test('9_Cuando_BuscarCorreoBandejaEntrada_Deberia_DevolverElCorreoBuscado', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     const manager = new ConcreteManager();
     manager.agregar(contacto2);
     manager.crearcorreo(email);
@@ -77,18 +77,18 @@ test('9_Cuando_BuscarCorreoBandejaEntrada_Deberia_DevolverElCorreoBuscado', () =
 test('10_Cuando_BuscarCorreoBandejaEnviados_Deberia_DevolverElCorreoBuscado', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     const manager = new ConcreteManager();
     manager.agregar(contacto2);
     manager.agregar(contacto1);
     manager.crearcorreo(email);
-    expect(contacto1.buscarcorreoBandejaEnviados("Trabajo").remitente).toEqual(contacto1);
+    expect(contacto1.buscarcorreoBandejaEnviados("Trabajo").remitente).toEqual(email.remitente);
 })
 
 test('11_Cuando_Update_Deberia_ActualizarACadaContactoDelEmail', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
-    const email = new Email({asunto: "Trabajo", contenido: "123456789", remitente: contacto1});
+    const email = Email.getInstance("Trabajo", "123456789", contacto1); 
     const manager = new ConcreteManager();
     manager.agregar(contacto2);
     manager.agregar(contacto1);

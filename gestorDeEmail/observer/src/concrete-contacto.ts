@@ -1,5 +1,5 @@
-import { Contacto } from "../interfaces/contacto.interface";
-import { Email } from "./email";
+import { Contacto } from "../singleton/interfaces/contacto.interface";
+import { Email } from "../singleton/email";
 
 export class ConcreteContacto implements Contacto{
     public nombre: string;
@@ -18,7 +18,7 @@ export class ConcreteContacto implements Contacto{
                 return i;
             }
         }
-        const noencontrado = new Email({asunto: "no encontrado", contenido: "no encontrado", remitente: new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"})})
+        const noencontrado = Email.getInstance("no encontrado", "no encontrado", new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"}));
         return noencontrado;
     }
 
@@ -28,7 +28,7 @@ export class ConcreteContacto implements Contacto{
                 return i;
             }
         }
-        const noencontrado = new Email({asunto: "no encontrado", contenido: "no encontrado", remitente: new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"})})
+        const noencontrado = Email.getInstance("no encontrado", "no encontrado", new ConcreteContacto({nombre: "no encontrado", correo: "no encontrado"}));
         return noencontrado;
     }
 

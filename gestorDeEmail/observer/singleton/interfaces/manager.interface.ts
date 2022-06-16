@@ -1,4 +1,4 @@
-import { Email } from "../src/email";
+import { Email } from "../email";
 import { Contacto } from "./contacto.interface";
 
 export interface Manager{
