@@ -2,6 +2,7 @@ import { ConcreteContacto } from "./observer/src/concrete-contacto"
 import { ConcreteManager } from "./observer/src/concrete-manager";
 import { Email } from "./observer/singleton/email"
 
+//#region Observer
 test('1_Cuando_SeCreaUnContacto_Deberia_CrearseConNombreYCorreo', () => {
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     expect(contacto1.nombre).toEqual("Nicolas");
@@ -96,3 +97,22 @@ test('11_Cuando_Update_Deberia_ActualizarACadaContactoDelEmail', () => {
     expect(contacto1.BandejaEnviados.length).toBe(1);
     expect(contacto1.BandejaEntrada.length).toBe(0);
 })
+
+//#endregion
+
+//#region Singleton
+test('12_Cuando_EmailInstance_NoDeberia_SerNulo', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const email1 = Email.getInstance("Trabajo", "123456789", contacto1); 
+    expect(email1 !== null).toBeTruthy();
+})
+
+test('13_Cuando_GetInstance_Deberian_LasVariablesDelObjetoSerIguales', () => {
+    const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
+    const email1 = Email.getInstance("Trabajo", "123456789", contacto1); 
+    const email2 = Email.getInstance("Trabajo", "123456789", contacto1); 
+    expect(email1 === email2).toBeTruthy();
+})
+
+
+//#endregion
