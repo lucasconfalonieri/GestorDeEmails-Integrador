@@ -44,7 +44,7 @@ test('6_Cuando_EliminarTodos_Deberia_EliminarTodosLosContactosDeLaLista', () => 
     manager.agregar(contacto1);
     manager.agregar(contacto2);
     expect(manager.contactos.length).toBe(2);
-    manager.eliminartodos()
+    manager.eliminartodos();
     expect(manager.contactos.length).toBe(0);
 })
 

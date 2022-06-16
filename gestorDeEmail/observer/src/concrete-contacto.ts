@@ -1,4 +1,4 @@
-import { Contacto } from "../singleton/interfaces/contacto.interface";
+import { Contacto } from "../interfaces/contacto.interface";
 import { Email } from "../singleton/email";
 
 export class ConcreteContacto implements Contacto{

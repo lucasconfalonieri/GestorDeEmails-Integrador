@@ -1,5 +1,5 @@
-import { Contacto } from "../singleton/interfaces/contacto.interface";
-import { Manager } from "../singleton/interfaces/manager.interface";
+import { Contacto } from "../interfaces/contacto.interface";
+import { Manager } from "../interfaces/manager.interface";
 import { Email } from "../singleton/email";
 
 export class ConcreteManager implements Manager{

@@ -1,4 +1,4 @@
-import { Email } from "../email";
+import { Email } from "../singleton/email";
 import { Contacto } from "./contacto.interface";
 
 export interface Manager{

@@ -1,4 +1,4 @@
-import { Contacto } from "../singleton/interfaces/contacto.interface";
+import { Contacto } from "../interfaces/contacto.interface";
 
 export class Email{
     public asunto: string;
