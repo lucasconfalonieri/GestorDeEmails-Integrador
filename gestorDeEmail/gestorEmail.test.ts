@@ -1,6 +1,7 @@
 import { ConcreteContacto } from "./observer/src/concrete-contacto"
 import { ConcreteManager } from "./observer/src/concrete-manager";
 import { Email } from "./observer/singleton/email"
+import { eliminarTodosDecorator } from "./observer/src/eliminartodosDecorator";
 
 //#region Observer
 test('1_Cuando_SeCreaUnContacto_Deberia_CrearseConNombreYCorreo', () => {
@@ -41,11 +42,12 @@ test('6_Cuando_EliminarTodos_Deberia_EliminarTodosLosContactosDeLaLista', () => 
     const contacto1 = new ConcreteContacto({nombre: "Nicolas", correo: "nicolas@gmail.com"});
     const contacto2 = new ConcreteContacto({nombre: "Lucas", correo: "lucas@gmail.com"});
     const manager = new ConcreteManager();
-    manager.agregar(contacto1);
-    manager.agregar(contacto2);
-    expect(manager.contactos.length).toBe(2);
-    manager.eliminartodos();
-    expect(manager.contactos.length).toBe(0);
+    const managerdecorator = new eliminarTodosDecorator(manager);
+    managerdecorator.agregar(contacto1);
+    managerdecorator.agregar(contacto2);
+    expect(managerdecorator.contactos.length).toBe(2);
+    managerdecorator.eliminartodos();
+    expect(managerdecorator.contactos.length).toBe(0);
 })
 
 test('7_Cuando_CrearCorreo_Deberia_CrearUnEmailParaNotificarlo', () => {

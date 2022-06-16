@@ -2,9 +2,13 @@ import { Contacto } from "../interfaces/contacto.interface";
 import { Manager } from "../interfaces/manager.interface";
 import { Email } from "../singleton/email";
 
-export class ConcreteManager implements Manager{
+export abstract class ManagerDecorator implements Manager{
+    protected manager: Manager;
     public contactos: Contacto[] = [];
-    public totalEmails: Email[] = [];
+
+    constructor(manager: Manager){
+        this.manager = manager;
+    }
 
     public agregar(contacto: Contacto): boolean {
         const isExist = this.contactos.includes(contacto);
@@ -22,11 +26,6 @@ export class ConcreteManager implements Manager{
         }
         this.contactos.splice(contactoIndex, 1);
         return true;
-    }
-
-    public crearcorreo(email: Email){
-        this.totalEmails.push(email);
-        this.notificar(email);
     }
 
     public notificar(email: Email){
